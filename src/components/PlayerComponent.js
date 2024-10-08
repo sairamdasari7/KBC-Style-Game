@@ -7,7 +7,7 @@ const PlayerComponent = ({ currentQuestion, options, onSubmitAnswer, questionNum
   const handleSubmit = () => {
     if (playerName && selectedAnswer) {
       onSubmitAnswer(playerName, selectedAnswer);
-      setSelectedAnswer('');  // Clear the selection after submitting
+      setSelectedAnswer('');
     } else {
       alert("Please enter your name and select an answer!");
     }
@@ -31,8 +31,8 @@ const PlayerComponent = ({ currentQuestion, options, onSubmitAnswer, questionNum
         {options.map((option, index) => (
           <button
             key={index}
-            onClick={() => setSelectedAnswer(option[0])} // Select the first letter (A, B, C, D)
-            className={selectedAnswer === option[0] ? 'selected' : ''} // Apply 'selected' class when option is selected
+            onClick={() => setSelectedAnswer(option[0])}
+            className={selectedAnswer === option[0] ? 'selected' : ''}
           >
             {option}
           </button>
