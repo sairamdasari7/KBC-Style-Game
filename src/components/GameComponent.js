@@ -38,7 +38,7 @@ const GameComponent = () => {
     <div className="game-container">
       <h1>KBC Game</h1>
       <div className="qr-code">
-        <QRCodeComponent value="http://localhost:3000/player" />
+        <QRCodeComponent value="https://kbc-style-game.vercel.app/player" />
       </div>
       {gameCompleted ? (
         <h2>Congratulations! You’ve completed the game!</h2>
@@ -50,7 +50,7 @@ const GameComponent = () => {
           <ul>
             {questions[currentQuestionIndex].options.map((option, index) => (
               <li key={index} onClick={() => handleAnswerSubmission(option[0])}>
-                {option}
+                {option} 
               </li>
             ))}
           </ul>
