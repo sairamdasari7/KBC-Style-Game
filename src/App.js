@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GameComponent from './components/GameComponent';
 import PlayerComponent from './components/PlayerComponent';
+import ResultComponent from './components/ResultComponent';
 
 const questions = [
   { question: "What is the capital of France?", options: ["A) Paris", "B) Rome", "C) Berlin", "D) Madrid"], answer: "A" },
@@ -12,10 +13,21 @@ const questions = [
 ];
 
 const App = () => {
-  const [currentQuestionIndex] = useState(0);
-
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+  
   const handleAnswerSubmission = (playerName, selectedAnswer) => {
-    console.log(`${playerName} submitted ${selectedAnswer}`);
+    const correctAnswer = questions[currentQuestionIndex].answer;
+    if (selectedAnswer === correctAnswer) {
+      setScore(score + 1);
+    }
+    
+    if (currentQuestionIndex + 1 < questions.length) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setIsGameOver(true);
+    }
   };
 
   return (
@@ -25,11 +37,17 @@ const App = () => {
         <Route 
           path="/player" 
           element={
-            <PlayerComponent 
-              currentQuestion={questions[currentQuestionIndex].question} 
-              options={questions[currentQuestionIndex].options} // Passing options here
-              onSubmitAnswer={handleAnswerSubmission} 
-            />
+            !isGameOver ? (
+              <PlayerComponent
+                currentQuestion={questions[currentQuestionIndex].question}
+                options={questions[currentQuestionIndex].options}
+                onSubmitAnswer={handleAnswerSubmission}
+                questionNumber={currentQuestionIndex + 1}
+                totalQuestions={questions.length}
+              />
+            ) : (
+              <ResultComponent score={score} totalQuestions={questions.length} />
+            )
           } 
         />
       </Routes>

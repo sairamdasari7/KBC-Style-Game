@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-const PlayerComponent = ({ currentQuestion, options, onSubmitAnswer }) => {
+const PlayerComponent = ({ currentQuestion, options, onSubmitAnswer, questionNumber, totalQuestions }) => {
   const [playerName, setPlayerName] = useState('');
   const [selectedAnswer, setSelectedAnswer] = useState('');
 
   const handleSubmit = () => {
     if (playerName && selectedAnswer) {
       onSubmitAnswer(playerName, selectedAnswer);
+      setSelectedAnswer('');  
     } else {
       alert("Please enter your name and select an answer!");
     }
@@ -22,15 +23,16 @@ const PlayerComponent = ({ currentQuestion, options, onSubmitAnswer }) => {
         placeholder="Your Name"
       />
       
-      <h2>{currentQuestion}</h2> 
+      <h2>{`Question ${questionNumber}/${totalQuestions}`}</h2>
+      <p>{currentQuestion}</p>  
 
       <h2>Select your answer</h2>
       <div className="options">
         {options.map((option, index) => (
           <button
             key={index}
-            onClick={() => setSelectedAnswer(option[0])} 
-            className={selectedAnswer === option[0] ? 'selected' : ''}  
+            onClick={() => setSelectedAnswer(option[0])}  // Select the first letter (A, B, C, D)
+            className={selectedAnswer === option[0] ? 'selected' : ''}
           >
             {option}  
           </button>

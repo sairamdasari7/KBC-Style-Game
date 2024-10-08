@@ -38,6 +38,23 @@ button:hover {
   background-color: #0056b3;
 }
 
+button.selected {
+  background-color: green;
+  color: white;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .game-container, .player-container {
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
 @media (max-width: 768px) {
   .game-container, .player-container {
     padding: 10px;
