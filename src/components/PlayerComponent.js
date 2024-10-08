@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const PlayerComponent = ({ currentQuestion, onSubmitAnswer }) => {
+const PlayerComponent = ({ currentQuestion, options, onSubmitAnswer }) => {
   const [playerName, setPlayerName] = useState('');
   const [selectedAnswer, setSelectedAnswer] = useState('');
 
@@ -21,14 +21,22 @@ const PlayerComponent = ({ currentQuestion, onSubmitAnswer }) => {
         onChange={(e) => setPlayerName(e.target.value)}
         placeholder="Your Name"
       />
+      
       <h2>{currentQuestion}</h2> 
+
       <h2>Select your answer</h2>
       <div className="options">
-        <button onClick={() => setSelectedAnswer('A')}>A</button>
-        <button onClick={() => setSelectedAnswer('B')}>B</button>
-        <button onClick={() => setSelectedAnswer('C')}>C</button>
-        <button onClick={() => setSelectedAnswer('D')}>D</button>
+        {options.map((option, index) => (
+          <button
+            key={index}
+            onClick={() => setSelectedAnswer(option[0])} 
+            className={selectedAnswer === option[0] ? 'selected' : ''}  
+          >
+            {option}  
+          </button>
+        ))}
       </div>
+
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );

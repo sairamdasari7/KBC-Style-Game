@@ -12,7 +12,7 @@ const questions = [
 ];
 
 const App = () => {
-  const [currentQuestionIndex] = useState(0); // No need for setCurrentQuestionIndex
+  const [currentQuestionIndex] = useState(0);
 
   const handleAnswerSubmission = (playerName, selectedAnswer) => {
     console.log(`${playerName} submitted ${selectedAnswer}`);
@@ -27,6 +27,7 @@ const App = () => {
           element={
             <PlayerComponent 
               currentQuestion={questions[currentQuestionIndex].question} 
+              options={questions[currentQuestionIndex].options} // Passing options here
               onSubmitAnswer={handleAnswerSubmission} 
             />
           } 
